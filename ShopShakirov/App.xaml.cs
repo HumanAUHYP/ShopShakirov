@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ShopShakirov
 {
@@ -29,6 +30,21 @@ namespace ShopShakirov
                     (sender as TextBlock).FontSize *= l;
                 else if (sender is Button)
                     (sender as Button).FontSize *= l;
+                else if (sender is CheckBox)
+                {
+                    ScaleTransform scale = new ScaleTransform(2, 2);
+                    if (l < 1)
+                    {
+                        scale.ScaleX *= l / 4;
+                        scale.ScaleY *= l / 4;
+                    }
+                    else
+                    {
+                        scale.ScaleX *= l;
+                        scale.ScaleY *= l;
+                    }
+                    (sender as CheckBox).RenderTransform = scale;
+                }
             }
         }
     }
