@@ -32,7 +32,7 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            
+
             <TextBlock Text="Login:"/>
             <TextBox x:Name="tbLogin" Grid.Column="1"/>
             <TextBlock Grid.Row="1" Text="Password:"/>
@@ -44,10 +44,8 @@
                 </CheckBox.LayoutTransform>
             </CheckBox>
 
-            <Button x:Name="btnLogin" Grid.Row="3" Content="Sign in" Click="BtnLoginClick"/>
-            <Button x:Name="btnRegister" Grid.Row="3" Grid.Column="1" Content="Sign up" Click="BtnRegisterClick"/>
+            <Button x:Name="btnLogin" Grid.Row="3" Grid.Column="1" Content="Sign in" Width="132" Click="BtnLoginClick" HorizontalAlignment="Left"/>
+            <Button x:Name="btnRegister" Grid.Row="3" Grid.Column="1" Content="Sign up" Width="132" Click="BtnRegisterClick" HorizontalAlignment="Right"/>
         </Grid>
-
-        
     </Grid>
 </Window>

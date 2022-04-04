@@ -12,28 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ShopShakirov.Pages;
 
-namespace ShopShakirov
+namespace ShopShakirov.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для RegisterPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RegisterPage : Page
     {
-        public MainWindow()
+        public RegisterPage()
         {
             InitializeComponent();
-        }
-
-        private void BtnLoginClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BtnRegisterClick(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }
