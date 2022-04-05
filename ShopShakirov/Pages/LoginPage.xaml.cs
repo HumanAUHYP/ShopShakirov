@@ -32,7 +32,7 @@ namespace ShopShakirov.Pages
 
         private void BtnRegisterClick(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new RegisterPage());
         }
     }
 }

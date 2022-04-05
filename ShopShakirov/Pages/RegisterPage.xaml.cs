@@ -24,5 +24,10 @@ namespace ShopShakirov.Pages
         {
             InitializeComponent();
         }
+
+        private void BtnRegisterClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new LoginPage());
+        }
     }
 }

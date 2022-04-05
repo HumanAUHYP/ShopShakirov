@@ -21,6 +21,8 @@ namespace ShopShakirov
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static ShopEntities dbConnection = new ShopEntities();
+        public static User authUser;
         public MainWindow()
         {
             InitializeComponent();
