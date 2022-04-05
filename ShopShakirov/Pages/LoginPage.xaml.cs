@@ -12,29 +12,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ShopShakirov.Pages;
 
-namespace ShopShakirov
+namespace ShopShakirov.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для LoginPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginPage : Page
     {
-        public MainWindow()
+        public LoginPage()
         {
             InitializeComponent();
-            myFrame.Navigate(new LoginPage());
         }
 
-        private void BtnBackClick(object sender, RoutedEventArgs e)
+        private void BtnLoginClick(object sender, RoutedEventArgs e)
         {
-            if (myFrame.CanGoBack) myFrame.GoBack();
+
         }
 
-        private void BtnForwardClick(object sender, RoutedEventArgs e)
+        private void BtnRegisterClick(object sender, RoutedEventArgs e)
         {
-            if (myFrame.CanGoForward) myFrame.GoForward();
+
         }
     }
 }

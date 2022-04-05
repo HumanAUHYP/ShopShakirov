@@ -10,42 +10,44 @@
     Height="450"
     mc:Ignorable="d">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition  Width="2*"/>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition Height="4*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-
-            <TextBlock Text="Login:"/>
-            <TextBox x:Name="tbLogin" Grid.Column="1"/>
-            <TextBlock Grid.Row="1" Text="Password:"/>
-            <PasswordBox x:Name="tbPassword" Grid.Row="1" Grid.Column="1"/>
-            <TextBlock Grid.Row="2" Text="Remember:"/>
-            <CheckBox x:Name="cbRemember" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
-                <CheckBox.LayoutTransform>
-                    <ScaleTransform ScaleX="2" ScaleY="2"/>
-                </CheckBox.LayoutTransform>
-            </CheckBox>
-
-            <Button x:Name="btnLogin" Grid.Row="3" Grid.Column="1" Content="Sign in" Width="132" Click="BtnLoginClick" HorizontalAlignment="Left"/>
-            <Button x:Name="btnRegister" Grid.Row="3" Grid.Column="1" Content="Sign up" Width="132" Click="BtnRegisterClick" HorizontalAlignment="Right"/>
+            <Image HorizontalAlignment="Left" Source="Images/logo.png" />
+            <TextBlock
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                FontSize="40"
+                Text="Shop" />
+            <StackPanel
+                Grid.Column="2"
+                Margin="0,0,0,30"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <Button
+                    x:Name="btnBack"
+                    Padding="10,0,10,0"
+                    Click="BtnBackClick"
+                    Content="Back" />
+                <Button
+                    x:Name="btnForward"
+                    Padding="10,0,10,0"
+                    Click="BtnForwardClick"
+                    Content="Forward" />
+            </StackPanel>
         </Grid>
+
+        <Frame
+            x:Name="myFrame"
+            Grid.Row="1"
+            NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>
