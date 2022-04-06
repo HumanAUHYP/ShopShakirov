@@ -30,7 +30,10 @@
                 <DataGridTextColumn Binding="{Binding Name}" Header="Наименование" />
                 <DataGridTextColumn Binding="{Binding Description}" Header="Описание" />
                 <DataGridTextColumn Binding="{Binding Unit.Name}" Header="Ед.измерения" />
-                <DataGridTextColumn Binding="{Binding AddDate, StringFormat='dd.MM.yy'}" Header="Дата добавления" />
+                <DataGridTextColumn
+                    x:Name="dgAddDate"
+                    Binding="{Binding AddDate, StringFormat='dd.MM.yy'}"
+                    Header="Дата добавления" />
 
                 <DataGridTemplateColumn Header="Страны поставщики">
                     <DataGridTemplateColumn.CellTemplate>
@@ -53,12 +56,13 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="150" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <Button
                 x:Name="btnAdd"
+                HorizontalAlignment="Right"
                 Click="BtnAddClick"
                 Content="Добавить" />
             <Button
@@ -69,8 +73,24 @@
             <Button
                 x:Name="btnDelete"
                 Grid.Column="2"
+                HorizontalAlignment="Left"
                 Click="BtnDeleteClick"
                 Content="Удалить" />
+
+            <!--  При нажатии на кнопку изменить  -->
+            <Button
+                x:Name="btnPhotoChange"
+                HorizontalAlignment="Right"
+                Click="BtnAddClick"
+                Content="Изменить фото"
+                Visibility="Hidden" />
+            <Button
+                x:Name="btnSave"
+                Grid.Column="1"
+                Click="BtnChangeClick"
+                Content="Сохранить"
+                Visibility="Hidden" />
+
         </Grid>
     </Grid>
 </Page>

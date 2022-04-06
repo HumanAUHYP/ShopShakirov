@@ -33,7 +33,7 @@ namespace ShopShakirov.Pages
 
         private void BtnChangeClick(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void BtnDeleteClick(object sender, RoutedEventArgs e)
