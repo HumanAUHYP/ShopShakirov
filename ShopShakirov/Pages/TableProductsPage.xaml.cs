@@ -16,23 +16,29 @@ using System.Windows.Shapes;
 namespace ShopShakirov.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для LoginPage.xaml
+    /// Логика взаимодействия для TableProductsPage.xaml
     /// </summary>
-    public partial class LoginPage : Page
+    public partial class TableProductsPage : Page
     {
-        public LoginPage()
+        public TableProductsPage()
         {
             InitializeComponent();
+            ProductTable.ItemsSource = MainWindow.dbConnection.Product.ToList();
         }
 
-        private void BtnLoginClick(object sender, RoutedEventArgs e)
+        private void BtnAddClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new TableProductsPage());
+
         }
 
-        private void BtnRegisterClick(object sender, RoutedEventArgs e)
+        private void BtnChangeClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new RegisterPage());
+
+        }
+
+        private void BtnDeleteClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

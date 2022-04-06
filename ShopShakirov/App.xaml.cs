@@ -17,35 +17,35 @@ namespace ShopShakirov
     {
         private void TextSizeChanger(object sender, SizeChangedEventArgs e)
         {
-            Size n = e.NewSize;
-            Size p = e.PreviousSize;
-            double l = n.Width / p.Width;
-            if (l != double.PositiveInfinity)
-            {
-                if (sender is TextBox)
-                    (sender as TextBox).FontSize *= l;
-                if (sender is PasswordBox)
-                    (sender as PasswordBox).FontSize *= l;
-                else if (sender is TextBlock)
-                    (sender as TextBlock).FontSize *= l;
-                else if (sender is Button)
-                    (sender as Button).FontSize *= l;
-                else if (sender is CheckBox)
-                {
-                    ScaleTransform scale = new ScaleTransform(2, 2);
-                    if (l < 1)
-                    {
-                        scale.ScaleX *= l / 4;
-                        scale.ScaleY *= l / 4;
-                    }
-                    else
-                    {
-                        scale.ScaleX *= l;
-                        scale.ScaleY *= l;
-                    }
-                    (sender as CheckBox).RenderTransform = scale;
-                }
-            }
+            //Size n = e.NewSize;
+            //Size p = e.PreviousSize;
+            //double l = n.Width / p.Width;
+            //if (l != double.PositiveInfinity)
+            //{
+            //    if (sender is TextBox)
+            //        (sender as TextBox).FontSize *= l;
+            //    if (sender is PasswordBox)
+            //        (sender as PasswordBox).FontSize *= l;
+            //    else if (sender is TextBlock)
+            //        (sender as TextBlock).FontSize *= l;
+            //    else if (sender is Button)
+            //        (sender as Button).FontSize *= l;
+            //    else if (sender is CheckBox)
+            //    {
+            //        ScaleTransform scale = new ScaleTransform(2, 2);
+            //        if (l < 1)
+            //        {
+            //            scale.ScaleX *= l / 4;
+            //            scale.ScaleY *= l / 4;
+            //        }
+            //        else
+            //        {
+            //            scale.ScaleX *= l;
+            //            scale.ScaleY *= l;
+            //        }
+            //        (sender as CheckBox).RenderTransform = scale;
+            //    }
+            //}
         }
     }
 }
