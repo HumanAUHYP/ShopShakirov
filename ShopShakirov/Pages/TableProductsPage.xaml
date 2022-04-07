@@ -76,21 +76,6 @@
                 HorizontalAlignment="Left"
                 Click="BtnDeleteClick"
                 Content="Удалить" />
-
-            <!--  При нажатии на кнопку изменить  -->
-            <Button
-                x:Name="btnPhotoChange"
-                HorizontalAlignment="Right"
-                Click="BtnAddClick"
-                Content="Изменить фото"
-                Visibility="Hidden" />
-            <Button
-                x:Name="btnSave"
-                Grid.Column="1"
-                Click="BtnChangeClick"
-                Content="Сохранить"
-                Visibility="Hidden" />
-
         </Grid>
     </Grid>
 </Page>

@@ -20,9 +20,11 @@ namespace ShopShakirov.Pages
     /// </summary>
     public partial class ChangeProductPage : Page
     {
-        public ChangeProductPage()
+        public ChangeProductPage(Product postProduct)
         {
             InitializeComponent();
+
+            Countries.ItemsSource = MainWindow.dbConnection.ProductCountry.Where(a => a.ProductId == postProduct.Id).ToList();
         }
     }
 }

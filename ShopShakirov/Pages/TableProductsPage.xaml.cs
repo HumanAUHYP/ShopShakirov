@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,7 +34,15 @@ namespace ShopShakirov.Pages
 
         private void BtnChangeClick(object sender, RoutedEventArgs e)
         {
-            
+            var postProduct = ProductTable.SelectedItem as Product;
+            try
+            {
+                NavigationService.Navigate(new ChangeProductPage(postProduct));
+            }
+            catch (TargetException)
+            {
+                MessageBox.Show("Не выбран продукт для изменения");
+            }
         }
 
         private void BtnDeleteClick(object sender, RoutedEventArgs e)
