@@ -24,6 +24,12 @@ namespace ShopShakirov.Pages
         public TableProductsPage()
         {
             InitializeComponent();
+            if (Properties.Settings.Default.RoleId < 3)
+            {
+                btnAdd.Visibility = Visibility.Visible;
+                btnChange.Visibility = Visibility.Visible;
+                btnDelete.Visibility = Visibility.Visible;
+            }
             ProductTable.ItemsSource = MainWindow.dbConnection.Product.ToList();
         }
 

@@ -20,6 +20,7 @@ namespace ShopShakirov.Pages
     /// </summary>
     public partial class LoginPage : Page
     {
+        int idUser;
         public LoginPage()
         {
             InitializeComponent();
@@ -27,12 +28,26 @@ namespace ShopShakirov.Pages
 
         private void BtnLoginClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new TableProductsPage());
+            if (CorrectLoginPassword())
+                NavigationService.Navigate(new TableProductsPage());
+            else
+                MessageBox.Show("Неверный логин или пароль");
         }
 
         private void BtnRegisterClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RegisterPage());
+        }
+
+        public bool CorrectLoginPassword()
+        {
+            var user = MainWindow.dbConnection.User.Where(a => a.Login == tbxLogin.Text && a.Password == pbxPassword.Password);
+            if (user.Count() != 0)
+            {
+                Properties.Settings.Default.RoleId = user.ToList()[0].RoleId;
+                return true;
+            }
+            else return false;
         }
     }
 }

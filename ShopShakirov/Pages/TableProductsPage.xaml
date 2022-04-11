@@ -64,18 +64,21 @@
                 x:Name="btnAdd"
                 HorizontalAlignment="Right"
                 Click="BtnAddClick"
-                Content="Добавить" />
+                Content="Добавить" 
+                Visibility="Hidden"/>
             <Button
                 x:Name="btnChange"
                 Grid.Column="1"
                 Click="BtnChangeClick"
-                Content="Изменить" />
+                Content="Изменить" 
+                Visibility="Hidden"/>
             <Button
                 x:Name="btnDelete"
                 Grid.Column="2"
                 HorizontalAlignment="Left"
                 Click="BtnDeleteClick"
-                Content="Удалить" />
+                Content="Удалить" 
+                Visibility="Hidden"/>
         </Grid>
     </Grid>
 </Page>
