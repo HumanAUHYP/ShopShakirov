@@ -30,12 +30,12 @@ namespace ShopShakirov.Pages
                 btnChange.Visibility = Visibility.Visible;
                 btnDelete.Visibility = Visibility.Visible;
             }
-            ProductTable.ItemsSource = MainWindow.dbConnection.Product.ToList();
+            ProductTable.ItemsSource = MainWindow.dbConnection.Product.Where(a => a.IsDeleted == false).ToList();
         }
 
         private void BtnAddClick(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new AddProductPage());
         }
 
         private void BtnChangeClick(object sender, RoutedEventArgs e)
@@ -53,7 +53,10 @@ namespace ShopShakirov.Pages
 
         private void BtnDeleteClick(object sender, RoutedEventArgs e)
         {
-
+            var product = ProductTable.SelectedItem as Product;
+            product.IsDeleted = true;
+            MainWindow.dbConnection.SaveChanges();
+            ProductTable.ItemsSource = MainWindow.dbConnection.Product.Where(a => a.IsDeleted == false).ToList();
         }
     }
 }
