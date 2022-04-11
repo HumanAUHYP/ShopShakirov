@@ -37,6 +37,19 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <ComboBox Name="cbCountries" DisplayMemberPath="Name" />
+            <StackPanel Orientation="Horizontal">
+                <Button
+                    x:Name="btnAddCountry"
+                    Width="114"
+                    Click="BtnAddCountryClick"
+                    Content="Добавить" />
+                <Button
+                    x:Name="btnDeleteCountry"
+                    Width="114"
+                    Click="BtnDeleteCountryClick"
+                    Content="Удалить" />
+            </StackPanel>
         </StackPanel>
 
         <!--  Main info  -->
@@ -47,11 +60,18 @@
             </StackPanel>
             <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
                 <TextBlock Text="Наименование" />
-                <TextBox x:Name="tbxName" Width="170" Text="{Binding Name}"/>
+                <TextBox
+                    x:Name="tbxName"
+                    MinWidth="170"
+                    Text="{Binding Name}" />
             </StackPanel>
             <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
                 <TextBlock Width="166" Text="Описание" />
-                <TextBox x:Name="tbxDescription" Width="170" Text="{Binding Description}" MinLines="3"/>
+                <TextBox
+                    x:Name="tbxDescription"
+                    MinWidth="170"
+                    MinLines="3"
+                    Text="{Binding Description}" />
             </StackPanel>
             <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
                 <TextBlock
@@ -61,8 +81,8 @@
                 <ComboBox
                     Name="cbUnit"
                     Width="170"
-                    DisplayMemberPath="Name" 
-                    SelectedItem="{Binding Unit}"/>
+                    DisplayMemberPath="Name"
+                    SelectedItem="{Binding Unit}" />
             </StackPanel>
         </StackPanel>
 
@@ -77,6 +97,18 @@
                 x:Name="btnSelectPhoto"
                 Click="BtnSelectPhotoClick"
                 Content="Выбрать фото" />
+        </StackPanel>
+
+        <!--  Buttons  -->
+        <StackPanel
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+            <Button
+                x:Name="btnSave"
+                Click="BtnSaveClick"
+                Content="Сохранить" />
         </StackPanel>
     </Grid>
 </Page>
