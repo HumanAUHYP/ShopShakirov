@@ -46,5 +46,28 @@ namespace ShopShakirov.Properties {
                 this["RoleId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime BanTime {
+            get {
+                return ((global::System.DateTime)(this["BanTime"]));
+            }
+            set {
+                this["BanTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsBaned {
+            get {
+                return ((bool)(this["IsBaned"]));
+            }
+            set {
+                this["IsBaned"] = value;
+            }
+        }
     }
 }

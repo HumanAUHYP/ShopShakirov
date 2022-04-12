@@ -20,18 +20,35 @@ namespace ShopShakirov.Pages
     /// </summary>
     public partial class LoginPage : Page
     {
-        int idUser;
+        int TryLoginCounts = 0;
+        TimeSpan TimeOfBan = new TimeSpan(0, 0, 0, 10);
         public LoginPage()
         {
             InitializeComponent();
+            tbxLogin.Text = Properties.Settings.Default.Login;
         }
 
         private void BtnLoginClick(object sender, RoutedEventArgs e)
         {
-            if (CorrectLoginPassword())
-                NavigationService.Navigate(new TableProductsPage());
-            else
-                MessageBox.Show("Неверный логин или пароль");
+            if (Properties.Settings.Default.IsBaned)
+            {
+                var UnbanTime = Properties.Settings.Default.BanTime + TimeOfBan;
+                var TimeOfUnban = UnbanTime - DateTime.Now;
+
+                if (DateTime.Now >= UnbanTime)
+                {
+                    Properties.Settings.Default.IsBaned = false;
+                    Properties.Settings.Default.Save();
+                    TimeOfUnban = TimeSpan.Zero;
+                    TryLoginCounts = 0;
+                    Login();
+                }
+                else MessageBox.Show($"До следующей попытки ввода {Math.Round(TimeOfUnban.TotalSeconds)} секунд");
+            }
+            else 
+            {
+                Login();
+            }
         }
 
         private void BtnRegisterClick(object sender, RoutedEventArgs e)
@@ -48,6 +65,32 @@ namespace ShopShakirov.Pages
                 return true;
             }
             else return false;
+        }
+
+        private void Login()
+        {
+            if (CorrectLoginPassword())
+            {
+                NavigationService.Navigate(new TableProductsPage());
+                if (cbRemember.IsChecked.GetValueOrDefault())
+                    Properties.Settings.Default.Login = tbxLogin.Text;
+                else
+                    Properties.Settings.Default.Login = null;
+                Properties.Settings.Default.Save();
+                TryLoginCounts = 0;
+            }
+            else
+            {
+                MessageBox.Show("Неверный логин или пароль");
+                TryLoginCounts++;
+                if (TryLoginCounts == 3)
+                {
+                    Properties.Settings.Default.BanTime = DateTime.Now;
+                    Properties.Settings.Default.IsBaned = true;
+                    Properties.Settings.Default.Save();
+                    MessageBox.Show($"Логин или пароль были введены неверно 3 раза, до следующей попытки ввода {Math.Round(TimeOfBan.TotalSeconds)} секунд");
+                }
+            }
         }
     }
 }
