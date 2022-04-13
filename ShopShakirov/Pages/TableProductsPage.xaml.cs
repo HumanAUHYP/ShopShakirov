@@ -21,6 +21,9 @@ namespace ShopShakirov.Pages
     /// </summary>
     public partial class TableProductsPage : Page
     {
+        int countInPage = 10;
+        int pageIndex = 1;
+        List<Product> Products = MainWindow.dbConnection.Product.Where(a => a.IsDeleted == false).ToList();
         public TableProductsPage()
         {
             InitializeComponent();
@@ -30,8 +33,10 @@ namespace ShopShakirov.Pages
                 btnChange.Visibility = Visibility.Visible;
                 btnDelete.Visibility = Visibility.Visible;
             }
-            ProductTable.ItemsSource = MainWindow.dbConnection.Product.Where(a => a.IsDeleted == false).ToList();
+            DisplayProductsInPage();
         }
+
+
 
         private void BtnAddClick(object sender, RoutedEventArgs e)
         {
@@ -57,6 +62,56 @@ namespace ShopShakirov.Pages
             product.IsDeleted = true;
             MainWindow.dbConnection.SaveChanges();
             ProductTable.ItemsSource = MainWindow.dbConnection.Product.Where(a => a.IsDeleted == false).ToList();
+        }
+
+        private void BtnLessPageClick(object sender, RoutedEventArgs e)
+        {
+            if (pageIndex > 1)
+            {
+                tbPageIndex.Text = Convert.ToString(--pageIndex);
+                DisplayProductsInPage();
+            }
+        }
+
+        private void BtnNextPageClick(object sender, RoutedEventArgs e)
+        {
+            if (countInPage * pageIndex < Products.Count())
+            {
+                tbPageIndex.Text = Convert.ToString(++pageIndex);
+                DisplayProductsInPage();
+            }
+        }
+
+        private void CbCountInPageSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                countInPage = int.Parse((cbCountInPage.SelectedItem as TextBlock).Text);
+            }
+            catch (Exception)
+            {
+                countInPage = Products.Count();
+            }
+            pageIndex = 1;
+            tbPageIndex.Text = Convert.ToString(pageIndex);
+            DisplayProductsInPage();
+        }
+
+        private void DisplayProductsInPage()
+        {
+            List<Product> ProductsInPage = new List<Product>();
+            for (int i = (pageIndex - 1) * countInPage; i < countInPage * pageIndex; i++)
+            {
+                try
+                {
+                    ProductsInPage.Add(Products[i]);
+                }
+                catch (Exception)
+                {
+                    break;
+                }
+            }
+            ProductTable.ItemsSource = ProductsInPage;
         }
     }
 }

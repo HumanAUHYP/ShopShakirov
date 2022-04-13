@@ -34,11 +34,15 @@
                 Orientation="Horizontal">
                 <Button
                     x:Name="btnBack"
+                    Width="110"
+                    Height="50"
                     Padding="10,0,10,0"
                     Click="BtnBackClick"
                     Content="Back" />
                 <Button
                     x:Name="btnForward"
+                    Width="110"
+                    Height="50"
                     Padding="10,0,10,0"
                     Click="BtnForwardClick"
                     Content="Forward" />
