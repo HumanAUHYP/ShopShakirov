@@ -103,7 +103,6 @@
                 x:Name="cbCountInPage"
                 Margin="80,0,0,0"
                 HorizontalAlignment="Left"
-                SelectedIndex="0"
                 SelectionChanged="CbCountInPageSelectionChanged">
                 <TextBlock Text="10" />
                 <TextBlock Text="50" />

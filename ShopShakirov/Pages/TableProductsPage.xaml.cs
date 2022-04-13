@@ -33,7 +33,9 @@ namespace ShopShakirov.Pages
                 btnChange.Visibility = Visibility.Visible;
                 btnDelete.Visibility = Visibility.Visible;
             }
+            
             DisplayProductsInPage();
+            cbCountInPage.SelectedIndex = 0;
         }
 
 
@@ -111,6 +113,8 @@ namespace ShopShakirov.Pages
                     break;
                 }
             }
+
+            tbProductCountInPage.Text = $"{ProductsInPage.Count() + (pageIndex-1) * countInPage} из {Products.Count()}";
             ProductTable.ItemsSource = ProductsInPage;
         }
     }
