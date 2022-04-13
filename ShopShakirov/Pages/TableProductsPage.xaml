@@ -19,6 +19,15 @@
 
         <!--  Filters  -->
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <ComboBox
+                x:Name="cbOrderSort"
+                Width="150"
+                SelectionChanged="CbOrderSortSelectionChanged">
+                <TextBlock x:Name="tbOrderName" Text="А-Я" />
+                <TextBlock x:Name="tbOrderDescName" Text="Я-А" />
+                <TextBlock x:Name="tbOrderDescDate" Text="Сначала новые" />
+                <TextBlock x:Name="tbOrderDate" Text="Сначала старые" />
+            </ComboBox>
             <TextBox
                 x:Name="tbxSearch"
                 Width="200"

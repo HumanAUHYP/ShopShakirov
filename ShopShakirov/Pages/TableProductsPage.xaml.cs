@@ -125,19 +125,38 @@ namespace ShopShakirov.Pages
 
         private void CbUnitSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Products = AllProducts;
-            var selectedUnit = cbUnit.SelectedItem as Unit;
-            if (selectedUnit.Name != "Все")
-            {
-                Products = Products.FindAll(a => a.UnitId == selectedUnit.Id);
-                pageIndex = 1;
-            }
-            DisplayProductsInPage();
+            SearchAndUnit();
         }
 
         private void TbxSearchTextChanged(object sender, TextChangedEventArgs e)
         {
+            SearchAndUnit();
+        }
+
+        private void CbOrderSortSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedSort = cbOrderSort.SelectedItem as TextBlock;
+            if (selectedSort == tbOrderName)
+                Products = Products.OrderBy(a => a.Name).ToList();
+            else if (selectedSort == tbOrderDescName)
+                Products = Products.OrderByDescending(a => a.Name).ToList();
+            else if (selectedSort == tbOrderDate)
+                Products = Products.OrderBy(a => a.AddDate).ToList();
+            else if (selectedSort == tbOrderDescDate)
+                Products = Products.OrderByDescending(a => a.AddDate).ToList();
+            AllProducts = Products;
+            DisplayProductsInPage();
+        }
+
+        private void SearchAndUnit()
+        {
             Products = AllProducts;
+            var selectedUnit = cbUnit.SelectedItem as Unit;
+            if (selectedUnit != null && selectedUnit.Name != "Все")
+            {
+                Products = Products.FindAll(a => a.UnitId == selectedUnit.Id);
+                pageIndex = 1;
+            }
             if (tbxSearch.Text != "")
                 Products = Products.Where(a => a.Name.Contains($"{tbxSearch.Text}") || a.Description.Contains($"{tbxSearch.Text}")).ToList();
             DisplayProductsInPage();
