@@ -24,6 +24,7 @@ namespace ShopShakirov.Pages
         int countInPage = 10;
         int pageIndex = 1;
         List<Product> Products = MainWindow.dbConnection.Product.Where(a => a.IsDeleted == false).ToList();
+        List<Product> AllProducts;
         public TableProductsPage()
         {
             InitializeComponent();
@@ -33,6 +34,10 @@ namespace ShopShakirov.Pages
                 btnChange.Visibility = Visibility.Visible;
                 btnDelete.Visibility = Visibility.Visible;
             }
+            var Units = MainWindow.dbConnection.Unit.ToList();
+            Units.Add(new Unit{ Name = "Все" });
+            cbUnit.ItemsSource = Units;
+            AllProducts = Products;
             
             DisplayProductsInPage();
             cbCountInPage.SelectedIndex = 0;
@@ -63,14 +68,14 @@ namespace ShopShakirov.Pages
             var product = ProductTable.SelectedItem as Product;
             product.IsDeleted = true;
             MainWindow.dbConnection.SaveChanges();
-            ProductTable.ItemsSource = MainWindow.dbConnection.Product.Where(a => a.IsDeleted == false).ToList();
+            DisplayProductsInPage();
         }
 
         private void BtnLessPageClick(object sender, RoutedEventArgs e)
         {
             if (pageIndex > 1)
             {
-                tbPageIndex.Text = Convert.ToString(--pageIndex);
+                pageIndex--;
                 DisplayProductsInPage();
             }
         }
@@ -79,7 +84,7 @@ namespace ShopShakirov.Pages
         {
             if (countInPage * pageIndex < Products.Count())
             {
-                tbPageIndex.Text = Convert.ToString(++pageIndex);
+                pageIndex++;
                 DisplayProductsInPage();
             }
         }
@@ -95,12 +100,12 @@ namespace ShopShakirov.Pages
                 countInPage = Products.Count();
             }
             pageIndex = 1;
-            tbPageIndex.Text = Convert.ToString(pageIndex);
             DisplayProductsInPage();
         }
 
         private void DisplayProductsInPage()
         {
+            tbPageIndex.Text = Convert.ToString(pageIndex);
             List<Product> ProductsInPage = new List<Product>();
             for (int i = (pageIndex - 1) * countInPage; i < countInPage * pageIndex; i++)
             {
@@ -116,6 +121,26 @@ namespace ShopShakirov.Pages
 
             tbProductCountInPage.Text = $"{ProductsInPage.Count() + (pageIndex-1) * countInPage} из {Products.Count()}";
             ProductTable.ItemsSource = ProductsInPage;
+        }
+
+        private void CbUnitSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Products = AllProducts;
+            var selectedUnit = cbUnit.SelectedItem as Unit;
+            if (selectedUnit.Name != "Все")
+            {
+                Products = Products.FindAll(a => a.UnitId == selectedUnit.Id);
+                pageIndex = 1;
+            }
+            DisplayProductsInPage();
+        }
+
+        private void TbxSearchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            Products = AllProducts;
+            if (tbxSearch.Text != "")
+                Products = Products.Where(a => a.Name.Contains($"{tbxSearch.Text}") || a.Description.Contains($"{tbxSearch.Text}")).ToList();
+            DisplayProductsInPage();
         }
     }
 }

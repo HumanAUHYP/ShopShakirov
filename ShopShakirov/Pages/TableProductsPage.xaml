@@ -12,10 +12,31 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <DataGrid Name="ProductTable" AutoGenerateColumns="False">
+
+        <!--  Filters  -->
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <TextBox
+                x:Name="tbxSearch"
+                Width="200"
+                Height="50"
+                TextChanged="TbxSearchTextChanged" />
+            <ComboBox
+                Name="cbUnit"
+                Width="150"
+                DisplayMemberPath="Name"
+                SelectedItem="{Binding Unit}"
+                SelectionChanged="CbUnitSelectionChanged" />
+        </StackPanel>
+
+        <!--  Table with products  -->
+        <DataGrid
+            Name="ProductTable"
+            Grid.Row="1"
+            AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="№" />
 
@@ -53,7 +74,9 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Row="1">
+
+        <!--  Buttons and pagination  -->
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="150" />
