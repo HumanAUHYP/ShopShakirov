@@ -36,7 +36,7 @@ namespace ShopShakirov.Pages
             }
             var Units = MainWindow.dbConnection.Unit.ToList();
             Units.Add(new Unit{ Name = "Все" });
-            cbUnit.ItemsSource = Units;
+            cbUnitSort.ItemsSource = Units;
             AllProducts = Products;
             
             DisplayProductsInPage();
@@ -68,6 +68,8 @@ namespace ShopShakirov.Pages
             var product = ProductTable.SelectedItem as Product;
             product.IsDeleted = true;
             MainWindow.dbConnection.SaveChanges();
+            Products = Products.Where(a => a.IsDeleted == false).ToList();
+            AllProducts = AllProducts.Where(a => a.IsDeleted == false).ToList();
             DisplayProductsInPage();
         }
 
@@ -125,40 +127,53 @@ namespace ShopShakirov.Pages
 
         private void CbUnitSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SearchAndUnit();
+            AllFilters();
         }
 
         private void TbxSearchTextChanged(object sender, TextChangedEventArgs e)
         {
-            SearchAndUnit();
+            AllFilters();
         }
 
         private void CbOrderSortSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedSort = cbOrderSort.SelectedItem as TextBlock;
-            if (selectedSort == tbOrderName)
-                Products = Products.OrderBy(a => a.Name).ToList();
-            else if (selectedSort == tbOrderDescName)
-                Products = Products.OrderByDescending(a => a.Name).ToList();
-            else if (selectedSort == tbOrderDate)
-                Products = Products.OrderBy(a => a.AddDate).ToList();
-            else if (selectedSort == tbOrderDescDate)
-                Products = Products.OrderByDescending(a => a.AddDate).ToList();
-            AllProducts = Products;
-            DisplayProductsInPage();
+            AllFilters();
         }
 
-        private void SearchAndUnit()
+        private void AllFilters()
         {
             Products = AllProducts;
-            var selectedUnit = cbUnit.SelectedItem as Unit;
+            var selectedUnit = cbUnitSort.SelectedItem as Unit;
             if (selectedUnit != null && selectedUnit.Name != "Все")
             {
                 Products = Products.FindAll(a => a.UnitId == selectedUnit.Id);
                 pageIndex = 1;
             }
+
             if (tbxSearch.Text != "")
                 Products = Products.Where(a => a.Name.Contains($"{tbxSearch.Text}") || a.Description.Contains($"{tbxSearch.Text}")).ToList();
+
+            var selectedSort = cbOrderSort.SelectedItem as TextBlock;
+            if (selectedSort != null)
+            {
+                if (selectedSort == tbOrderName)
+                    Products = Products.OrderBy(a => a.Name).ToList();
+                else if (selectedSort == tbOrderDescName)
+                    Products = Products.OrderByDescending(a => a.Name).ToList();
+                else if (selectedSort == tbOrderDate)
+                    Products = Products.OrderBy(a => a.AddDate).ToList();
+                else if (selectedSort == tbOrderDescDate)
+                    Products = Products.OrderByDescending(a => a.AddDate).ToList();
+            }
+            DisplayProductsInPage();
+        }
+
+        private void BtnResetClick(object sender, RoutedEventArgs e)
+        {
+            cbOrderSort.SelectedIndex = -1;
+            cbUnitSort.SelectedIndex = -1;
+            tbxSearch.Text = "";
+            Products = AllProducts;
             DisplayProductsInPage();
         }
     }

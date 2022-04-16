@@ -18,7 +18,14 @@
         </Grid.RowDefinitions>
 
         <!--  Filters  -->
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+        <StackPanel
+            Margin="0,0,74,0"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                x:Name="btnReset"
+                Click="BtnResetClick"
+                Content="Сброс" />
             <ComboBox
                 x:Name="cbOrderSort"
                 Width="150"
@@ -34,7 +41,7 @@
                 Height="50"
                 TextChanged="TbxSearchTextChanged" />
             <ComboBox
-                Name="cbUnit"
+                Name="cbUnitSort"
                 Width="150"
                 DisplayMemberPath="Name"
                 SelectedItem="{Binding Unit}"
