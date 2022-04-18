@@ -10,14 +10,14 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="2*" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="1.5*" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -30,25 +30,19 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
-                <RowDefinition />
             </Grid.RowDefinitions>
 
             <TextBlock Text="Login:" />
-            <TextBox x:Name="tbLogin" Grid.Column="1" />
+            <TextBox x:Name="tbxLogin" Grid.Column="1" />
             <TextBlock Grid.Row="1" Text="Password:" />
             <PasswordBox
-                x:Name="tbPassword"
+                x:Name="pbxPassword"
                 Grid.Row="1"
-                Grid.Column="1" />
-            <TextBlock Grid.Row="2" Text="Password:" />
-            <PasswordBox
-                x:Name="tbPassword1"
-                Grid.Row="2"
                 Grid.Column="1" />
 
             <Button
                 x:Name="btnRegister"
-                Grid.Row="3"
+                Grid.Row="2"
                 Grid.Column="1"
                 Width="132"
                 HorizontalAlignment="Left"
