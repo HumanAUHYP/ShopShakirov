@@ -21,7 +21,7 @@ namespace ShopShakirov.Pages
     public partial class LoginPage : Page
     {
         int TryLoginCounts = 0;
-        TimeSpan TimeOfBan = new TimeSpan(0, 0, 0, 10);
+        TimeSpan TimeOfBan = new TimeSpan(0, 0, 1, 0);
         public LoginPage()
         {
             InitializeComponent();
